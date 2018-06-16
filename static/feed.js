@@ -1,74 +1,8 @@
-const buffer = [{
-    items: [{
-        'link': 'https://ru.aliexpress.com/item/-/32825303424.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB1THlsfazB9uJjSZFMq6xq4XXaf/Bobokateer-Vogue.jpg_220x220.jpg'
-    }, {
-        'link': 'https://ru.aliexpress.com/item/-/32852682510.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB18MEDXbSYBuNjSspiq6xNzpXar/-.jpg_220x220.jpg'
-    }],
-    votes: 100,
-    rating: 55,
-    author: '@elderos'
-}, {
-    items: [{
-        'link': 'https://ru.aliexpress.com/item/-/32825303424.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB1THlsfazB9uJjSZFMq6xq4XXaf/Bobokateer-Vogue.jpg_220x220.jpg'
-    }, {
-        'link': 'https://ru.aliexpress.com/item/-/32852682510.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB18MEDXbSYBuNjSspiq6xNzpXar/-.jpg_220x220.jpg'
-    }],
-    votes: 88,
-    rating: 22,
-    author: '@elderos'
-}, {
-    items: [{
-        'link': 'https://ru.aliexpress.com/item/-/32825303424.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB1THlsfazB9uJjSZFMq6xq4XXaf/Bobokateer-Vogue.jpg_220x220.jpg'
-    }, {
-        'link': 'https://ru.aliexpress.com/item/-/32852682510.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB18MEDXbSYBuNjSspiq6xNzpXar/-.jpg_220x220.jpg'
-    }],
-    votes: 88,
-    rating: 22,
-    author: '@elderos'
-}, {
-    items: [{
-        'link': 'https://ru.aliexpress.com/item/-/32825303424.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB1THlsfazB9uJjSZFMq6xq4XXaf/Bobokateer-Vogue.jpg_220x220.jpg'
-    }, {
-        'link': 'https://ru.aliexpress.com/item/-/32852682510.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB18MEDXbSYBuNjSspiq6xNzpXar/-.jpg_220x220.jpg'
-    }],
-    votes: 88,
-    rating: 22,
-    author: '@elderos'
-}, {
-    items: [{
-        'link': 'https://ru.aliexpress.com/item/-/32825303424.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB1THlsfazB9uJjSZFMq6xq4XXaf/Bobokateer-Vogue.jpg_220x220.jpg'
-    }, {
-        'link': 'https://ru.aliexpress.com/item/-/32852682510.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB18MEDXbSYBuNjSspiq6xNzpXar/-.jpg_220x220.jpg'
-    }],
-    votes: 88,
-    rating: 22,
-    author: '@elderos'
-}, {
-    items: [{
-        'link': 'https://ru.aliexpress.com/item/-/32825303424.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB1THlsfazB9uJjSZFMq6xq4XXaf/Bobokateer-Vogue.jpg_220x220.jpg'
-    }, {
-        'link': 'https://ru.aliexpress.com/item/-/32852682510.html',
-        'image': 'https://ae01.alicdn.com/kf/HTB18MEDXbSYBuNjSspiq6xNzpXar/-.jpg_220x220.jpg'
-    }],
-    votes: 88,
-    rating: 22,
-    author: '@elderos'
-}];
+const buffer = [];
 
 
 function fetch_next(count, callback) {
-    $.get('feed/fetch?count' + count,
+    $.get('fetch-feed?count=' + count,
         null,
         function (data, status, req) {
             for (let i = 0; i < data.length; i++){
