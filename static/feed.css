@@ -1,0 +1,41 @@
+#feed {
+    background: lavender;
+}
+
+.feed-post {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 200px;
+    margin: 2px 0;
+    background: white;
+    align-content: center;
+}
+
+.feed-post__item-container {
+    min-width: 100%;
+    max-width: 100%;
+    display: flex;
+    position: relative;
+    flex-grow: 1.7;
+}
+
+
+.feed-post__item-link {
+    display: block;
+    margin: 2px;
+    flex: 1;
+}
+
+.feed-post__img {
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+.feed-post__panel {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 50px;
+    max-height: 50px;
+}
