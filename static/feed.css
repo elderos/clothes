@@ -3,10 +3,10 @@
 }
 
 .feed-post {
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 320px;
+    max-width: 600px;
     min-height: 200px;
-    margin: 2px 0;
+    margin: 5px auto;
     background: white;
     align-content: center;
 }
@@ -30,6 +30,7 @@
     display: block;
     max-height: 100%;
     max-width: 100%;
+    margin: auto;
     position: relative;
 }
 
