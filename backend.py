@@ -3,18 +3,22 @@ from cherrypy.lib.static import serve_file
 import os
 from argparse import ArgumentParser
 
+def static_path(path):
+    return os.path.abspath(os.path.join('static', path))
+
 
 class Viewer(object):
+
     @cherrypy.expose
     def index(self):
         raise cherrypy.HTTPRedirect('/feed')
 
     def game(self):
-        serve_file(os.path.join('static', 'game.html'))
+        serve_file(static_path('game.html'))
 
     @cherrypy.expose
     def feed(self):
-        serve_file(os.path.join('static', 'feed.html'))
+        serve_file(static_path('feed.html'))
 
 
 def main(args):
