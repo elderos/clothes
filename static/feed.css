@@ -21,13 +21,15 @@
 
 
 .feed-post__item-link {
-    display: block;
+    display: flex;
     margin: 2px;
     flex: 1;
+    align-content: center;
 }
 
 .feed-post__img {
     display: block;
+    flex: 1;
     max-height: 100%;
     max-width: 100%;
     margin: auto;
