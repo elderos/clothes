@@ -15,11 +15,11 @@ class Viewer(object):
 
     @cherrypy.expose
     def game(self):
-        serve_file(static_path('game.html'))
+        return serve_file(static_path('game.html'))
 
     @cherrypy.expose
     def feed(self):
-        serve_file(static_path('feed.html'))
+        return serve_file(static_path('feed.html'))
 
     @cherrypy.expose(['fetch-feed'])
     @cherrypy.tools.json_out()
