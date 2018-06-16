@@ -1,6 +1,7 @@
 import cherrypy
 from cherrypy.lib.static import serve_file
 import os
+from argparse import ArgumentParser
 
 
 class Viewer(object):
@@ -16,9 +17,9 @@ class Viewer(object):
         serve_file(os.path.join('static', 'feed.html'))
 
 
-if __name__ == '__main__':
+def main(args):
     cherrypy.server.socket_host = 'localhost'
-    cherrypy.server.socket_port = 8111  
+    cherrypy.server.socket_port = args.port
     config = {
         '/': {
             'tools.staticdir.on': True,
@@ -29,3 +30,10 @@ if __name__ == '__main__':
     viewer = Viewer()
 
     cherrypy.quickstart(viewer, '', config)
+
+if __name__ == '__main__':
+    parser = ArgumentParser()
+    parser.add_argument('-p', '--port', default=8111, type=int)
+
+    args = parser.parse_args()
+    main(args)
