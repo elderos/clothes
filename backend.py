@@ -35,7 +35,7 @@ class Viewer(object):
             'votes': 100,
             'rating': 55,
             'author': '@elderos'
-        }] * count
+        }] * int(count)
 
 
 def main(args):

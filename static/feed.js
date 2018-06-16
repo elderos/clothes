@@ -65,6 +65,11 @@ function draw_next() {
     });
     panel.appendTo(post);
 
+    if (feed.children.length > 1000) {
+        return false;
+    }
+
+
     return true;
 }
 
@@ -73,10 +78,12 @@ function check_feed_position(){
     const feed = $('#feed')[0];
     let rect = feed.getBoundingClientRect();
     let window_bottom = $(window).scrollTop() + $(window).height();
-    while (rect.bottom - window_bottom < 250) {
+    while (rect.height - window_bottom < 250) {
         if (!draw_next()){
             break;
         }
+        console.log(rect);
+        console.log(window_bottom);
         rect = feed.getBoundingClientRect();
     }
 }
