@@ -34,7 +34,7 @@ function create_item_view(data){
 
 function draw_next() {
     if (buffer.length < 2){
-        fetch_next(10, draw_next);
+        fetch_next(10, check_feed_position);
     }
 
     if (buffer.length < 1){
