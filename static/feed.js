@@ -48,7 +48,7 @@ function create_panel(data){
 
     function refresh_score(){
         let int_score = data.likes - data.votes;
-        score.innerHTML = int_score > 0 ? '+' + int_score : int_score;
+        score[0].innerHTML = int_score > 0 ? '+' + int_score : int_score;
     };
 
     const dislike_link = $('<a>', {
