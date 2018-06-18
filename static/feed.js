@@ -32,6 +32,56 @@ function create_item_view(data){
 }
 
 
+function create_panel(data){
+    const panel = $('<div>', {
+        class: 'feed-post__panel'
+    });
+
+    const btn_container = $('<div>', {
+        class: 'feed-post__panel__btn-container'
+    });
+    btn_container.appendTo(panel);
+
+    const score = $('<div>', {
+        class: 'feed-post__panel__score'
+    });
+
+    function refresh_score(){
+        let int_score = data.likes - data.votes;
+        score.innerHTML = intScore > 0 ? '+' + int_score : int_score;
+    };
+
+    const dislike_link = $('<a>', {
+        class: 'feed-post__panel__link feed-post__panel__dislike',
+        onclick: function(){
+            $.get('vote?pairid=' + data.pair_id + '&vote=dislike');
+            data.votes += 1;
+            refresh_score();
+        }
+    });
+    dislike_link.appendTo(btn_container);
+
+
+    score.appendTo(btn_container);
+
+
+    const like_link = $('<a>', {
+        class: 'feed-post__panel__link feed-post__panel__like',
+        onclick: function(){
+            $.get('vote?pairid=' + data.pair_id + '&vote=like');
+            data.likes += 1;
+            data.votes += 1;
+            refresh_score();
+        }
+
+    });
+    like_link.appendTo(btn_container);
+
+
+    return panel;
+}
+
+
 function draw_next() {
     if (buffer.length < 2){
         fetch_next(10, check_feed_position);
@@ -60,9 +110,7 @@ function draw_next() {
         view.appendTo(item_container);
     }
 
-    const panel = $('<div>', {
-        class: 'feed-post__panel'
-    });
+    const panel = create_panel(data);
     panel.appendTo(post);
 
     if (feed.children.length > 1000) {

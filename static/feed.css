@@ -42,3 +42,33 @@
     min-height: 50px;
     max-height: 50px;
 }
+
+.feed-post__panel__btn-container {
+    diplay: flex;
+    margin: 0 auto;
+    min-width: 100px;
+}
+
+.feed-post__panel__btn-container * {
+    flex: 1;
+}
+
+.feed-post__panel__link {
+    min-height: 25px;
+    max-height: 25px;
+    min-width: 25px;
+    max-width: 25px;
+    border-radius: 10px;
+}
+
+.feed-post__panel__dislike {
+    background: lightpink;
+}
+
+.feed-post__panel__like {
+    background: lightgreen;
+}
+
+.feed-post__panel__score {
+    
+}

@@ -84,8 +84,9 @@ set data = %(jdata)s
 where pair_id = %(pair_id)s;
 ''', {'jdata': json.dumps(pair), 'pair_id': int(pairid)})
                 conn.commit()
-            except:
+            except Exception as e:
                 conn.rollback()
+                cherrypy.HTTPError(e.message)
 
 
 
