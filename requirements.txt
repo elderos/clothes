@@ -1,1 +1,3 @@
 cherrypy
+pg8000
+ujson

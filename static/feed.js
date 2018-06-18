@@ -24,7 +24,7 @@ function create_item_view(data){
     });
     const image = $('<img>', {
         class: 'feed-post__img',
-        src: data.image,
+        src: data.image_small,
         target: '_blank',
     }).appendTo(link);
 

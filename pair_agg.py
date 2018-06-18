@@ -1,10 +1,10 @@
 import csv
 from argparse import ArgumentParser
 import itertools as it
-
+import json
 
 def print_header():
-    print '\t'.join([
+    print('\t'.join([
         'INPUT:item1_id',
         'INPUT:item1_title',
         'INPUT:item1_image',
@@ -13,7 +13,7 @@ def print_header():
         'INPUT:item2_image',
         'GOLDEN:result',
         'HINT:text'
-    ])
+    ]))
 
 
 def main(args):
@@ -30,7 +30,7 @@ def main(args):
             r = group[0]
             if not r['INPUT:item1_id']:
                 continue
-            print '\t'.join([
+            print('\t'.join([
                 r['INPUT:item1_id'],
                 r['INPUT:item1_title'],
                 r['INPUT:item1_image'],
@@ -38,8 +38,8 @@ def main(args):
                 r['INPUT:item2_title'],
                 r['INPUT:item2_image'],
                 'yes' if pos_score * 100 / total > 75 else 'no',
-                ''
-            ])
+                json.dumps({'votes': total, 'likes': pos_score})
+            ]))
 
 
 if __name__ == '__main__':
