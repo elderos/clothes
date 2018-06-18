@@ -45,6 +45,7 @@
 
 .feed-post__panel__btn-container {
     display: flex;
+    align-content: center;
     margin: 0 auto;
     min-width: 150px;
     min-height: 50px;

@@ -47,7 +47,7 @@ function create_panel(data){
     });
 
     function refresh_score(){
-        let int_score = data.likes - data.votes;
+        let int_score = data-likes + (data.likes - data.votes);
         score[0].innerHTML = int_score > 0 ? '+' + int_score : int_score;
     };
 
