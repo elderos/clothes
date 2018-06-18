@@ -53,21 +53,22 @@ function create_panel(data){
 
     const dislike_link = $('<a>', {
         class: 'feed-post__panel__link feed-post__panel__dislike',
-        onclick: function(){
+        click: function(){
             $.get('vote?pairid=' + data.pair_id + '&vote=dislike');
             data.votes += 1;
             refresh_score();
         }
     });
     dislike_link.appendTo(btn_container);
-
+    
 
     score.appendTo(btn_container);
+    refresh_score();
 
 
     const like_link = $('<a>', {
         class: 'feed-post__panel__link feed-post__panel__like',
-        onclick: function(){
+        click: function(){
             $.get('vote?pairid=' + data.pair_id + '&vote=like');
             data.likes += 1;
             data.votes += 1;
