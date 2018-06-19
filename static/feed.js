@@ -69,17 +69,21 @@ function create_panel(data){
     });
     btn_container.appendTo(panel);
 
-    const score = $('<div>', {
+    const score_wrapper = $('<div>', {
         class: 'feed-post__panel__score'
     });
-
+    const score = $('<span>', {
+        class: 'feed-post__panel__score-text'
+    });
+    score.appendTo(score_wraper);
+    
     const dislike_link = $('<a>', {
         class: 'feed-post__panel__link feed-post__panel__dislike'
     });
     dislike_link.appendTo(btn_container);
     
 
-    score.appendTo(btn_container);
+    score_wrapper.appendTo(btn_container);
     refresh_score(data, score[0]);
 
     const like_link = $('<a>', {
