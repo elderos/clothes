@@ -75,7 +75,7 @@ function create_panel(data){
     const score = $('<span>', {
         class: 'feed-post__panel__score-text'
     });
-    score.appendTo(score_wraper);
+    score.appendTo(score_wrapper);
     
     const dislike_link = $('<a>', {
         class: 'feed-post__panel__link feed-post__panel__dislike'
