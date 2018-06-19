@@ -25,12 +25,13 @@
     margin: 2px;
     flex: 1;
     align-content: center;
+    position: relative;
 }
 
 .feed-post__img {
     display: block;
-    max-height: 220px;
-    max-width: 220px;
+    max-height: 100%;
+    max-width: 100%;
     margin: auto;
     position: relative;
 }
