@@ -75,4 +75,5 @@
 
 .feed-post__panel__score {
     display: flex;
+    max-width: 50px;
 }
