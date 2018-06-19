@@ -32,6 +32,33 @@ function create_item_view(data){
 }
 
 
+function refresh_score(data, score){
+    const final_score = data.likes + (data.likes - data.votes);
+    score.innerHTML = final_score > 0 ? '+' + final_score : final_score; 
+}
+
+
+function change_like_status(data, like_btn, score_wrapper, dislike_btn, vote){
+    $.get(
+        'vote?pairid=' + data.pair_id + '&vote=' + vote,
+        null,
+        function(answer_data, status, request){
+            like_btn.removeClass('feed-post__panel__pressed');
+            dislike_btn.removeClass('feed-post__panel__pressed');
+            if (answer_data.status == 'like'){
+                like_btn.addClass('feed-post__panel__pressed');
+            } else if (answer_data.status == 'dislike'){
+                dislike_btn.addClass('feed-post__panel__pressed');
+            }
+            data.likes = answer_data.pair_data.likes;
+            data.votes = answer_data.pair_data.votes;
+            refresh_score(data, score_wrapper[0]);
+        },
+        'json'
+    )
+}
+
+
 function create_panel(data){
     const panel = $('<div>', {
         class: 'feed-post__panel'
@@ -46,37 +73,26 @@ function create_panel(data){
         class: 'feed-post__panel__score'
     });
 
-    function refresh_score(){
-        let int_score = data.likes + (data.likes - data.votes);
-        score[0].innerHTML = int_score > 0 ? '+' + int_score : int_score;
-    };
-
     const dislike_link = $('<a>', {
-        class: 'feed-post__panel__link feed-post__panel__dislike',
-        click: function(){
-            $.get('vote?pairid=' + data.pair_id + '&vote=dislike');
-            data.votes += 1;
-            refresh_score();
-        }
+        class: 'feed-post__panel__link feed-post__panel__dislike'
     });
     dislike_link.appendTo(btn_container);
     
 
     score.appendTo(btn_container);
-    refresh_score();
-
+    refresh_score(data, score[0]);
 
     const like_link = $('<a>', {
-        class: 'feed-post__panel__link feed-post__panel__like',
-        click: function(){
-            $.get('vote?pairid=' + data.pair_id + '&vote=like');
-            data.likes += 1;
-            data.votes += 1;
-            refresh_score();
-        }
-
+        class: 'feed-post__panel__link feed-post__panel__like'
     });
     like_link.appendTo(btn_container);
+
+    dislike_link.click(function(){
+        change_like_status(data, like_link, score, dislike_link, 'dislike');
+    });
+    like_link.click(function(){
+        change_like_status(data, like_link, score, dislike_link, 'like');
+    });
 
 
     return panel;
