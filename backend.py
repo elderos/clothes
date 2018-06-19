@@ -63,7 +63,6 @@ class Viewer(object):
         return serve_file(static_path('feed.html'))
 
     @cherrypy.expose(['fetch-feed'])
-    @cherrypy.tools.json_out()
     def fetch_feed(self, count=10):
         user_id = self.check_user_id()
         resp = []
@@ -75,18 +74,16 @@ class Viewer(object):
             pair = self.pairs[r_key]
             pair['pair_id'] = r_key
             resp.append(pair)
-        return resp
+        return json.dumps(resp)
 
     @cherrypy.expose
-    @cherrypy.tools.json_out()
     def vote(self, pairid, vote):
         pairid = int(pairid)
         if pairid not in self.pairs:
-            cherrypy.HTTPError('Unknown pair id')
-            return
+            return cherrypy.HTTPError(500, 'Unknown pair id')
 
         if vote not in ['like', 'dislike']:
-            return cherrypy.HTTPError('Unknown vote type')
+            return cherrypy.HTTPError(500, 'Unknown vote type')
 
         user_id = self.check_user_id()
 
@@ -100,7 +97,7 @@ select vote
 from likes
 where pair_id = %(pair_id)s
     and cookie_id = %(cookie_id)s;
-''')
+''', {'pair_id': pairid, 'cookie_id': user_id})
                 row = cursor.fetchone();
                 prev_vote = 'none' if row is None else row[0]
 
@@ -137,12 +134,12 @@ on conflict (pair_id, cookie_id) do update
 update pairs
 set data = %(jdata)s
 where pair_id = %(pair_id)s;
-''', {'jdata': json.dumps(pair), 'pair_id': int(pairid)})
+''', {'jdata': json.dumps(pair), 'pair_id': pairid})
                 conn.commit()
-                return {'status': final_vote, 'pair_data': pair}
+                return json.dumps({'status': final_vote, 'pair_data': pair})
             except Exception as e:
                 conn.rollback()
-                cherrypy.HTTPError(e.message)
+                raise e
 
 
 def main(args):

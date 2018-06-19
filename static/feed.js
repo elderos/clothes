@@ -151,8 +151,6 @@ function check_feed_position(){
         if (!draw_next()){
             break;
         }
-        console.log(rect);
-        console.log(window_bottom);
         rect = feed.getBoundingClientRect();
     }
 }
