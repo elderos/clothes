@@ -18,3 +18,16 @@ body {
     padding: 0;
     background: lavender;
 }
+
+#menu-icon {
+    position: fixed;
+    max-width: 10%;
+    min-width: 50px;
+    max-height: 10%;
+    min-height: 50px;
+    z-index: 1;
+    background: url(logo.svg) 100% 100%;
+    background-size: contain;
+    border-radius: 5px;
+    cursor: pointer;
+}
