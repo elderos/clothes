@@ -67,13 +67,37 @@ class Viewer(object):
         user_id = self.check_user_id()
         resp = []
         count = int(count)
-        if count <= 0:
+        if count <= 0 or count > 100:
             return cherrypy.HTTPError('Invalid parameter value: count=%s' % count)
+
+        pair_ids = []
         for _ in range(int(count)):
             r_key = random.choice(self.ids)
             pair = self.pairs[r_key]
             pair['pair_id'] = r_key
             resp.append(pair)
+            pair_ids.append(r_key)
+
+        conn = connect()
+        cursor = conn.cursor()
+        cursor.execute('''
+select pair_id, vote 
+from likes
+where pair_id in (''' + ', '.join([str(x) for x in pair_ids]) + ''')
+    and cookie_id = %(cookie_id)s''', {
+            'cookie_id': user_id
+        });
+
+        rows = cursor.fetchall()
+        conn.close()
+        if rows is not None:
+            d = {}
+            for row in rows:
+                d[row['pair_id']] = row['vote']
+
+            for pair in resp:
+                pair['status'] = d.get(pair['pair_id'], 'none')
+
         return json.dumps(resp)
 
     @cherrypy.expose

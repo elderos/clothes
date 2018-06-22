@@ -38,18 +38,29 @@ function refresh_score(data, score){
 }
 
 
+function btn_svg_string(direction, color){
+    const points = direction == 'up' ? '0,100 50,0 100,100' : '0,0 50,100 100,0';
+    return '<svg viewBox="0 0 100 100" width="100%" height="100%"><polygon points="' + points + '" style="fill:' + color + ';"/></svg>';
+}
+
+
+function refresh_like_btns(status, like_btn, dislike_btn){
+    like_btn[0].innerHTML = btn_svg_string('up', 'darkgrey');
+    dislike_btn[0].innerHTML = btn_svg_string('down', 'darkgrey');
+    if (status == 'like'){
+        like_btn[0].innerHTML = btn_svg_string('up', 'lightgreen');
+    } else if (status == 'dislike'){
+        dislike_btn[0].innerHTML = btn_svg_string('down', 'lightpink');
+    }
+}
+
+
 function change_like_status(data, like_btn, score_wrapper, dislike_btn, vote){
     $.get(
         'vote?pairid=' + data.pair_id + '&vote=' + vote,
         null,
         function(answer_data, status, request){
-            like_btn.removeClass('feed-post__panel__pressed');
-            dislike_btn.removeClass('feed-post__panel__pressed');
-            if (answer_data.status == 'like'){
-                like_btn.addClass('feed-post__panel__pressed');
-            } else if (answer_data.status == 'dislike'){
-                dislike_btn.addClass('feed-post__panel__pressed');
-            }
+            refresh_like_btns(answer_data.status, like_btn, dislike_btn);
             data.likes = answer_data.pair_data.likes;
             data.votes = answer_data.pair_data.votes;
             refresh_score(data, score_wrapper[0]);
@@ -77,18 +88,18 @@ function create_panel(data){
     });
     score.appendTo(score_wrapper);
     
-    const dislike_link = $('<a>', {
-        class: 'feed-post__panel__link feed-post__panel__dislike'
+    const dislike_link = $('<div>', {
+        class: 'feed-post__panel__link feed-post__panel__dislike',
     });
     dislike_link.appendTo(btn_container);
-    
 
     score_wrapper.appendTo(btn_container);
     refresh_score(data, score[0]);
 
-    const like_link = $('<a>', {
-        class: 'feed-post__panel__link feed-post__panel__like'
+    const like_link = $('<div>', {
+        class: 'feed-post__panel__link feed-post__panel__like',
     });
+
     like_link.appendTo(btn_container);
 
     dislike_link.click(function(){
@@ -98,6 +109,7 @@ function create_panel(data){
         change_like_status(data, like_link, score, dislike_link, 'like');
     });
 
+    refresh_like_btns(data.status, like_link, dislike_link);
 
     return panel;
 }
