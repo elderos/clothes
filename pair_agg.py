@@ -19,7 +19,7 @@ def print_header():
 def main(args):
     with open(args.file, 'r') as f:
         reader = csv.DictReader(f, delimiter='\t')
-        rows = [x for x in reader if x['GOLDEN:result'] == '']
+        rows = [x for x in reader if x['GOLDEN:result'] == '' or x['GOLDEN:result'] is None]
         key_fn = lambda x: (x['INPUT:item1_id'], x['INPUT:item2_id'])
         rows.sort(key=key_fn)
         print_header()
