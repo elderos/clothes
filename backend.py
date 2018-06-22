@@ -44,7 +44,7 @@ class Viewer(object):
             user_id = str(uuid.uuid4())
             cherrypy.response.cookie['user-id'] = user_id
         else:
-            user_id = cookie['user-id']
+            user_id = str(cookie['user-id'])
         return user_id
 
 
