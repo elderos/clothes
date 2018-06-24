@@ -117,7 +117,7 @@ function create_panel(data){
 
 function draw_next() {
     if (buffer.length < 2){
-        fetch_next(10, check_feed_position);
+        fetch_next(30, check_feed_position);
     }
 
     if (buffer.length < 1){

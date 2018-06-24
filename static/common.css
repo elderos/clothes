@@ -20,14 +20,25 @@ body {
 }
 
 #menu-icon {
-    position: fixed;
-    max-width: 10%;
+    max-width: 50px;
     min-width: 50px;
-    max-height: 10%;
+    max-height: 50px;
     min-height: 50px;
-    z-index: 1;
+    z-index: 2;
     background: url(logo.svg) 100% 100%;
     background-size: contain;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#menu-icon-container{
+    max-width: 50px;
+    min-width: 50px;
+    max-height: 50px;
+    min-height: 50px;
+    background: white;
+    border-bottom-right-radius: 5px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
 }
