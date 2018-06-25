@@ -74,7 +74,7 @@ class Viewer(object):
         for _ in range(1000):
             r_key = random.choice(self.ids)
             pair = self.pairs[r_key]
-            if pair['likes'] * 100.0 / pair['likes'] < 70:
+            if pair['likes'] * 100.0 / pair['votes'] < 70:
                 continue
             pair['pair_id'] = r_key
             resp.append(pair)
