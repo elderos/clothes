@@ -71,12 +71,16 @@ class Viewer(object):
             return cherrypy.HTTPError('Invalid parameter value: count=%s' % count)
 
         pair_ids = []
-        for _ in range(int(count)):
+        for _ in range(1000):
             r_key = random.choice(self.ids)
             pair = self.pairs[r_key]
+            if pair['likes'] * 100.0 / pair['likes'] < 70:
+                continue
             pair['pair_id'] = r_key
             resp.append(pair)
             pair_ids.append(r_key)
+            if len(resp) >= count:
+                break
 
         conn = connect()
         cursor = conn.cursor()
