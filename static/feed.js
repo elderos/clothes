@@ -150,7 +150,6 @@ function draw_next() {
         return false;
     }
 
-
     return true;
 }
 
@@ -170,6 +169,7 @@ function check_feed_position(){
 
 window.addEventListener('load', function () {
     check_feed_position();
+    $('#menu-feed-btn').addClass('menu__btn__active')
 });
 
 window.addEventListener('scroll', function (e){

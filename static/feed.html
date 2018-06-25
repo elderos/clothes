@@ -9,6 +9,7 @@
     <title>Looks great</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="menu.js"></script>
     <script type="text/javascript" src="feed.js"></script>
 </head>
 <body>
@@ -33,11 +34,28 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+<div id="page-container">
     <div id="menu-icon-container">
         <div id="menu-icon"></div>
     </div>
+    <nav id="menu">
+        <div id="menu-icon-placeholder" class="menu__btn"></div>
+        <div id="menu-feed-btn" class="menu__btn">
+            <div id="menu-feed-btn__icon" class="menu__icon"></div>
+        </div>
+        <div id="menu-game-btn" class="menu__btn">
+            <div id="menu-game-btn__icon" class="menu__icon"></div>
+        </div>
+        <div id="menu-notifications-btn" class="menu__btn">
+            <div id="menu-notifications-btn__icon" class="menu__icon"></div>
+        </div>
+        <div id="menu-profile-btn" class="menu__btn">
+            <div id="menu-profile-btn__icon" class="menu__icon"></div>
+        </div>
+    </nav>
     <div id="feed">
 
     </div>
+</div>
 </body>
 </html>

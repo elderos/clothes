@@ -20,25 +20,95 @@ body {
 }
 
 #menu-icon {
-    max-width: 50px;
-    min-width: 50px;
-    max-height: 50px;
-    min-height: 50px;
+    max-width: 44px;
+    min-width: 44px;
+    max-height: 44px;
+    min-height: 44px;
     z-index: 2;
     background: url(logo.svg) 100% 100%;
     background-size: contain;
     border-radius: 5px;
     cursor: pointer;
+    margin: auto;
 }
 
 #menu-icon-container{
-    max-width: 50px;
-    min-width: 50px;
-    max-height: 50px;
-    min-height: 50px;
+    max-width: 44px;
+    min-width: 44px;
+    max-height: 44px;
+    min-height: 44px;
     background: white;
     border-bottom-right-radius: 5px;
     position: fixed;
     z-index: 1;
     top: 0;
+}
+
+#menu {
+    max-height: 44px;
+    min-height: 44px;
+    min-width: 100%;
+    max-width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    background: white;
+    margin-bottom: 5px;
+}
+
+#menu > div {
+    cursor: pointer;
+    min-height: 44px;
+}
+
+#menu-icon-placeholder{
+    min-width: 44px;
+    background: white;
+}
+
+#menu-game-btn {
+}
+
+#menu-feed-btn {
+}
+
+#menu-profile-btn {
+}
+
+.menu__btn {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.menu__btn__active {
+    background: lavender;
+}
+
+.menu__icon {
+    min-height: 40px;
+    max-height: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    margin: auto;
+}
+
+#menu-notifications-btn__icon {
+    background: url(bell.svg) 50% 50%  no-repeat;
+    background-size: contain;
+}
+
+#menu-profile-btn__icon{
+    background: url(profile.svg) 50% 50% no-repeat;
+    background-size: contain;
+}
+
+#menu-feed-btn__icon {
+    background: url(feed.svg) 50% 50% no-repeat;
+    background-size: contain;
+}
+
+#menu-game-btn__icon {
+    background: url(game.svg) 50% 50% no-repeat;
+    background-size: contain;
 }
