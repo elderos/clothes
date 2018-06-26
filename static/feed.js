@@ -21,6 +21,7 @@ function create_item_view(data){
     const link = $('<a>', {
         class: 'feed-post__item-link',
         href: data.link,
+        target: '_blank'
     });
     const image = $('<img>', {
         class: 'feed-post__img',
@@ -124,7 +125,7 @@ function draw_next() {
         return false;
     }
 
-    const feed = $('#feed')[0];
+    const feed = $('.tab-container__active')[0];
 
     const data = buffer.pop();
     const post = $('<div>', {
@@ -155,7 +156,7 @@ function draw_next() {
 
 
 function check_feed_position(){
-    const feed = $('#feed')[0];
+    const feed = $('.tab-container__active')[0];
     let rect = feed.getBoundingClientRect();
     let window_bottom = $(window).scrollTop() + $(window).height();
     while (rect.height - window_bottom < 250) {
@@ -166,10 +167,20 @@ function check_feed_position(){
     }
 }
 
+function set_tab_active(tab_id, tab_wrapper_id){
+    $('.tab-wrapper').removeClass('tab__active');
+    $(tab_wrapper_id).addClass('tab__active');
+    $('.tab__container').removeClass('tab-container__active');
+    const main_tab = $(tab_id);
+    main_tab.show();
+    main_tab.addClass('tab-container__active');
+}
+
 
 window.addEventListener('load', function () {
+    $('#menu-feed-btn').addClass('menu__btn__active');
+    set_tab_active('#random-feed-container', '#tab-wrapper__random');
     check_feed_position();
-    $('#menu-feed-btn').addClass('menu__btn__active')
 });
 
 window.addEventListener('scroll', function (e){
