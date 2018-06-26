@@ -26,6 +26,8 @@ def load_pairs(conn):
         if res is None:
             break
         pair_id, jdata = res
+        if jdata['likes'] < 3:
+            continue
         pairs[pair_id] = jdata
     cursor.close()
     return pairs
