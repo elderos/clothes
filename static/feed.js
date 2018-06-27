@@ -1,22 +1,3 @@
-const buffer = [];
-
-
-function fetch_next(count, callback) {
-    $.get('fetch-feed?count=' + count,
-        null,
-        function (data, status, req) {
-            for (let i = 0; i < data.length; i++){
-                buffer.push(data[i]);
-            }
-            if (callback) {
-                callback();
-            }
-        },
-        'json'
-    );
-}
-
-
 function create_item_view(data){
     const link = $('<a>', {
         class: 'feed-post__item-link',
@@ -117,15 +98,18 @@ function create_panel(data){
 
 
 function draw_next() {
+    const feed = $('.tab-container__active')[0];
+    
+    const buffer = feed.buffer;
+
     if (buffer.length < 2){
-        fetch_next(30, check_feed_position);
+        fetch_next(feed.url_build_fn, check_feed_position);
     }
 
     if (buffer.length < 1){
         return false;
     }
 
-    const feed = $('.tab-container__active')[0];
 
     const data = buffer.pop();
     const post = $('<div>', {
@@ -155,11 +139,33 @@ function draw_next() {
 }
 
 
+function random_feed_fetch(){
+    let url = 'fetch-feed?count=30';
+    return url;
+}
+
+
+function fetch_next(url_build_fn, callback) {
+    $.get(url_build_fn(),
+        null,
+        function (data, status, req) {
+            for (let i = 0; i < data.length; i++){
+                buffer.push(data[i]);
+            }
+            if (callback) {
+                callback();
+            }
+        },
+        'json'
+    );
+}
+
+
 function check_feed_position(){
     const feed = $('.tab-container__active')[0];
     let rect = feed.getBoundingClientRect();
     let window_bottom = $(window).scrollTop() + $(window).height();
-    while (rect.height - window_bottom < 250) {
+    while (rect.bottom - window_bottom < 250) {
         if (!draw_next()){
             break;
         }
@@ -167,10 +173,11 @@ function check_feed_position(){
     }
 }
 
+
 function set_tab_active(tab_id, tab_wrapper_id){
     $('.tab-wrapper').removeClass('tab__active');
     $(tab_wrapper_id).addClass('tab__active');
-    $('.tab__container').removeClass('tab-container__active');
+    $('.tab-container').removeClass('tab-container__active');
     const main_tab = $(tab_id);
     main_tab.show();
     main_tab.addClass('tab-container__active');
@@ -181,6 +188,9 @@ window.addEventListener('load', function () {
     $('#menu-feed-btn').addClass('menu__btn__active');
     set_tab_active('#random-feed-container', '#tab-wrapper__random');
     check_feed_position();
+    $('#random-feed-container').url_build_fn = random_feed_fetch;
+    $('#top-feed-container').url_build_fb = random_feed_fetch; //TODO
+    $('.tab-container').map(function(x){x.buffer = [];})
 });
 
 window.addEventListener('scroll', function (e){

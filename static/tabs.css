@@ -35,10 +35,12 @@
     border-bottom: 1px solid black;
 }
 
-.tab__container {
+.tab-container {
     visibility: hidden;
+    display: none;
 }
 
 .tab-container__active {
     visibility: visible;
+    display: block;
 }
