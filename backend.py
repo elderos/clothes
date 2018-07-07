@@ -55,7 +55,7 @@ class Viewer(object):
 
     @cherrypy.expose
     def index(self):
-        raise cherrypy.HTTPRedirect('/feed')
+        return self.feed()
 
     @cherrypy.expose
     def game(self):
