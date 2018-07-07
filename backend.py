@@ -53,7 +53,7 @@ class Viewer(object):
     def admitad_verify(self):
         return serve_file(os.path.abspath('verify-admitad.txt'))
 
-    @cherrypy.expose
+    @cherrypy.expose(['', 'index.html', 'index.htm', 'index'])
     def index(self):
         return self.feed()
 
