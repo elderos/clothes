@@ -146,6 +146,7 @@ function random_feed_fetch(){
 
 
 function fetch_next(url_build_fn, callback) {
+    const buffer = $('.tab-container__active')[0].buffer;
     $.get(url_build_fn(),
         null,
         function (data, status, req) {
@@ -165,7 +166,7 @@ function check_feed_position(){
     const feed = $('.tab-container__active')[0];
     let rect = feed.getBoundingClientRect();
     let window_bottom = $(window).scrollTop() + $(window).height();
-    while (rect.bottom - window_bottom < 250) {
+    while (rect.height - window_bottom < 250) {
         if (!draw_next()){
             break;
         }
@@ -179,18 +180,19 @@ function set_tab_active(tab_id, tab_wrapper_id){
     $(tab_wrapper_id).addClass('tab__active');
     $('.tab-container').removeClass('tab-container__active');
     const main_tab = $(tab_id);
-    main_tab.show();
     main_tab.addClass('tab-container__active');
+    check_feed_position();
 }
 
 
 window.addEventListener('load', function () {
     $('#menu-feed-btn').addClass('menu__btn__active');
+    $('#random-feed-container')[0].url_build_fn = random_feed_fetch;
+    $('#top-feed-container')[0].url_build_fn = random_feed_fetch; //TODO
+    $('.tab-container').map(function(x){
+        $(this)[0].buffer = [];
+    });
     set_tab_active('#random-feed-container', '#tab-wrapper__random');
-    check_feed_position();
-    $('#random-feed-container').url_build_fn = random_feed_fetch;
-    $('#top-feed-container').url_build_fb = random_feed_fetch; //TODO
-    $('.tab-container').map(function(x){x.buffer = [];})
 });
 
 window.addEventListener('scroll', function (e){
