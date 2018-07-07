@@ -183,6 +183,10 @@ def main(args):
             'tools.sessions.on': True,
             'tools.staticdir.on': True,
             'tools.staticdir.dir': os.path.abspath('static')
+        },
+        '/verify-admitad.txt': {
+            'tools.staticfile.on': True,
+            'tools.staticfile.filename': os.path.abspath('verify-admitad.txt')
         }
     }
 
