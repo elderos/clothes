@@ -49,6 +49,9 @@ class Viewer(object):
             user_id = str(cookie['user-id'])
         return user_id
 
+    @cherrypy.expose(['verify-admitad.txt'])
+    def admitad_verify(self):
+        return serve_file('verify-admitad.txt')
 
     @cherrypy.expose
     def index(self):
