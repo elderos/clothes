@@ -99,7 +99,7 @@ def vote():
         vote = 0
 
     model.merge_like(user_id, post_id, vote)
-    return render_template('vote.html', post=model.fetch_votes(post_id))
+    return render_template('vote.html', post=model.fetch_votes(user_id, post_id))
 
 @app.route('/save')
 def save():
@@ -107,7 +107,7 @@ def save():
     post_id = int(request.args.get('post_id', None))
 
     model.merge_save(user_id, post_id)
-    return render_template('vote.html', post=model.fetch_votes(post_id))
+    return render_template('vote.html', post=model.fetch_votes(user_id, post_id))
 
 
 

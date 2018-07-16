@@ -133,8 +133,12 @@ def fetch_feed(user_id, t, count, position):
     print res
     pids = ', '.join([str(r['id']) for r in res])
     savs = {row[0]: row[1] for row in db.engine.execute('select post_id, sum(1) from saves where saves.post_id in (%s) group by saves.post_id' % pids)}
+    saved = {row[0]: row[1] for row in db.engine.execute('select post_id, 1 from saves where post_id in (%s) and saves.user_id=%s' % (pids, user_id))}
+    votes = {row[0]: row[1] for row in db.engine.execute('select post_id, value from likes where post_id in (%s) and likes.user_id=%s' % (pids, user_id))}
     for r in res:
         r['saves'] = savs.get(r['id'], 0)
+        r['saved'] = saved.get(r['id'], 0)
+        r['vote'] =  votes.get(r['id'], 0)
         r['votes'] = r['votes'] or 0
     return res
 
@@ -228,9 +232,15 @@ def merge_save(user_id, post_id):
     ) % data)
 '''
 
-def fetch_votes(post_id):
+def fv_or_0(rows):
+    return rows[0][0] if rows and rows[0] and rows[0][0] else 0
+
+
+def fetch_votes(user_id, post_id):
     res = {
-        'votes': db.engine.execute('select sum(value) from likes where post_id=%s' % post_id).fetchall()[0][0] or 0,
-        'saves': db.engine.execute('select sum(1) from saves where post_id=%s' % post_id).fetchall()[0][0] or 0,
+        'vote': fv_or_0(db.engine.execute('select value from likes where post_id=%s and user_id=%s' % (post_id, user_id)).fetchall()),
+        'saved': fv_or_0(db.engine.execute('select 1 from saves where post_id=%s and user_id=%s' % (post_id, user_id)).fetchall()),
+        'votes': fv_or_0(db.engine.execute('select sum(value) from likes where post_id=%s' % post_id).fetchall()),
+        'saves': fv_or_0(db.engine.execute('select sum(1) from saves where post_id=%s' % post_id).fetchall()),
     }
     return res

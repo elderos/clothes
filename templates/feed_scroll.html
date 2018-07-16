@@ -12,13 +12,9 @@
             <img src="item-image/{{ post['item_2_id'] }}"/>
         </a>
     </td></tr>
-    <tr><td class="vote-content">
-        <b class="save{% if post.saved==1 %}_active{% endif %}" onclick="save(this)"></b>
-        <div class="score">{{ post['saves'] }}</div>
-        <b class="dislike{% if post.vote==-1 %}_active{% endif %}" onclick="send_vote(this)"></b>
-        <div class="score">{{ post['votes'] }}</div>
-        <b class="like{% if post.vote==1 %}_active{% endif %}" onclick="send_vote(this)"></b>
-    </td></tr>
+    <tr>
+        {% include 'vote.html' %}
+    </tr>
 </div>
 </table>
 {% endfor %}
