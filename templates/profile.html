@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block add_meta %}
+    <link rel="stylesheet" href="static/profile.css">
+    <link rel="stylesheet" href="static/tabs.css">
+    <link rel="stylesheet" href="static/feed.css">
+    <script type="text/javascript" src="static/feed.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="profile-container">
+    <div><img src='/user-image/{{ user.id }}'/></div>
+    <div>{{ user.name }}</div>
+    <div>{{ user.login }}</div>
+    <div>{{ user.email }}</div>
+    <div>{{ user.gender }}</div>
+</div>
+
+<ul id="tabs">
+    <li id="tabs-likes-btn">
+        Likes
+    </li>
+    <li id="tabs-saved-btn">
+        Saved
+    </li>
+    <li id="tabs-posts-btn">
+        Posts
+    </li>
+</ul>
+<div id="tabs-content">
+    <div id="tabs-likes-content">
+        {% with feed=likes %}
+            {% include 'feed_scroll.html' %}
+        {% endwith %}
+    </div>
+    <div id="tabs-saved-content">
+        {% with feed=saves %}
+            {% include 'feed_scroll.html' %}
+        {% endwith %}
+    </div>
+    <div id="tabs-posts-content">
+        {% with feed=posts %}
+            {% include 'feed_scroll.html' %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}

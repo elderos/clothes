@@ -1,93 +1,62 @@
-#page-container {
-    max-width: 600px;
-    min-width: 320px;
-    margin: 0 auto;
-}
-
-#feed {
-    background: lavender;
-    margin-top: 10px;
-}
-
-.feed-post {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 200px;
-    margin: 0 auto 20px;
-    background: white;
-    align-content: center;
-}
-
-.feed-post__item-container {
-    min-width: 100%;
-    max-width: 100%;
-    display: flex;
-    position: relative;
-    flex-grow: 1.7;
-}
-
-
-.feed-post__item-link {
-    display: flex;
-    margin: 2px;
-    flex: 1;
-    align-content: center;
-    position: relative;
-}
-
-.feed-post__img {
-    display: block;
-    max-height: 100%;
-    max-width: 100%;
-    margin: auto;
-    position: relative;
-}
-
-.feed-post__panel {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 50px;
-    max-height: 50px;
-}
-
-.feed-post__panel__btn-container {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    margin: 0 auto;
-    min-width: 150px;
-    min-height: 50px;
-}
-
-.feed-post__panel__btn-container > * {
-    flex: 1;
-    margin: 5px;
-}
-
-.feed-post__panel__link {
-    min-height: 35px;
-    max-height: 35px;
-    min-width: 35px;
-    max-width: 35px;
-    cursor: pointer;
-    display: block;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-
-.feed-post__panel__score {
+.post-container {
+    width: 96%;
+    padding: 5px; 
+    background: #fff;
+    border: 1px solid #eee;
+    margin: 2%;
     display: table;
-    min-width: 30px;
-    max-width: 50px;
-    margin: auto 0;
 }
 
-.feed-post__panel__score-text {
-    text-align: center;
-    display: block;
+.user-container img {
+    border: 1px solid #eee;
+    width: 32px;
+    height: 32px;
 }
+
+.items-container img {
+    width: 48%;
+    max-height: 400px;
+    border: 1px solid #eee;
+}
+
+
+#menu > li.active{
+    background-color: #dadada;
+    cursor: default;
+}
+
+.vote-content > div {
+    float: left;
+}
+
+.vote-content > b {
+    display: block;
+    height: 16px;
+    width: 16px;
+    float: left;
+}
+
+.dislike {
+    background-image: url(/static/downvote.svg);
+}
+
+.like {
+    background-image: url(/static/upvote.svg);
+}
+
+.dislike_active {
+    background-image: url(/static/downvote_active.svg);
+}
+
+.like_active {
+    background-image: url(/static/upvote_active.svg);
+}
+
+.save {
+    background-image: url(/static/save.svg);
+}
+
+.save_active {
+    background-image: url(/static/save_active.svg);
+}
+

@@ -49,3 +49,45 @@
     height: 45px;
     animation: pulse 1s ease infinite,
 }
+
+#game_column_1 {
+    float: left;
+    width: 50%;
+    max-height: 84vh;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+}
+
+#game_column_2 {
+    float: left;
+    width: 50%;
+    max-height: 84vh;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+}
+
+img {
+    border: 1px solid #eee;
+    margin: 2%;
+    width: 97%;
+}
+
+.vote-content {
+    width: 100%;
+    text-align: center;
+}
+
+.vote-content button {
+    width: 32px;
+    height: 32px;
+    padding: auto;
+}
+
+button.post {
+    background-image: url(/static/post.svg);
+    background-repeat: no-repeat;
+}
+
+

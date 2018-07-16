@@ -1,0 +1,24 @@
+{% for post in feed %}
+<table class="post-container" id='feed_{{ post['id'] }}'>
+    <tr><td class="user-container">
+        <img src="user-image/{{ post['user_id'] }}"/>
+        {{ post.user_name}} posted {{ post.timestamp|timesince }}
+    </td></tr>
+    <tr><td class="items-container">
+        <a href="/item/{{ post['item_1_id'] }}" target="_blank">
+            <img src="item-image/{{ post['item_1_id'] }}"/>
+        </a>
+        <a href="/item/{{ post['item_2_id'] }}" target="_blank">
+            <img src="item-image/{{ post['item_2_id'] }}"/>
+        </a>
+    </td></tr>
+    <tr><td class="vote-content">
+        <b class="save{% if post.saved==1 %}_active{% endif %}" onclick="save(this)"></b>
+        <div class="score">{{ post['saves'] }}</div>
+        <b class="dislike{% if post.vote==-1 %}_active{% endif %}" onclick="send_vote(this)"></b>
+        <div class="score">{{ post['votes'] }}</div>
+        <b class="like{% if post.vote==1 %}_active{% endif %}" onclick="send_vote(this)"></b>
+    </td></tr>
+</div>
+</table>
+{% endfor %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set menu_active='game' %}
+{% block title %}Game{% endblock %}
+{% block add_meta %}
+    <link rel="stylesheet" href="static/game.css">
+    <script type="text/javascript" src="static/game.js"></script>
+{% endblock %}
+
+{% block content %}
+    <form> <input type=text> </input> </form>
+    <div class="game">
+        <div class="columns-container">
+            {% with column=column_1, column_pos=1 %}
+            <div id="game_column_1">
+                {% include 'game_column.html' %}
+            </div>
+            {% endwith %}
+            {% with column=column_2, column_pos=2 %}
+            <div id="game_column_2">
+                {% include 'game_column.html' %}
+            </div>
+            {% endwith %} 
+        </div>
+        <div class="vote-content">
+            <button class="post" onclick="send_post(this)"></button>
+        </div>
+    </div>
+{% endblock %}

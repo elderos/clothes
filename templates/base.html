@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="height=device-height, width=device-width, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="static/common.css"/>
+    <link rel="icon" type="image/png" href="static/logo.png" />
+    <!--<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"/>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>-->
+    <title>{% block title %}{% endblock %}</title>
+    {% block add_meta %}{% endblock %}
+    <script src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/common.js"></script>
+    {% endblock %}
+</head>
+{% macro menu_item(name, text, ur) -%}
+    <li id="menu-{{ name }}-btn" {% if menu_active==name %}class ="active"{% endif %}>
+        {% if menu_active==name %}
+            <span>{{ text }}</span>
+        {% else %}
+            <span><a href="{{ur}}">{{ text }}</a></span>
+        {% endif %}
+        {% if name=='menu' %}
+        {% endif %}
+    </li>
+{%- endmacro %}
+<body>
+    <div id="page-container">
+        {% block menu %}
+            <ul id="menu">
+                {{ menu_item('feed', 'Feed', '/feed') }}
+                {{ menu_item('game', 'Game', '/game') }}
+                {{ menu_item('notifications', 'Notifications', '/notifications') }}
+                <li id="menu-menu-btn" class="has-sub{% if menu_active=='menu' %} active{% endif %}">
+                    <span>Menu</span>
+                    <ul>
+                        <li><span><a href="/profile">Profile</a></span></li>
+                        <li><span><a href="/settings">Settings</a></span></li>
+                        <li><span><a href="/about">About</a></span></li>
+                    </ul>
+                </li>
+            </ul>
+            {% block tabs %}{% endblock %}
+        {% endblock %}
+        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="footer">{% block footer %}{% endblock %}</div>
+    </div>
+</body>
+</html>

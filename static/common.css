@@ -1,114 +1,121 @@
 html {
-    min-width: 100%;
-    min-height: 100%;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 768px;
+    width: 100%;
     height: 100%;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
+    font-size: 24px;
+    font-family: arial;
+}
+
+@media only screen and (max-width: 1000px) {
+    html {
+        font-size: 3vw;
+        font-family: arial;
+    }
 }
 
 body {
-    min-width: 100%;
-    min-height: 100%;
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-    background: lavender;
-}
-
-#menu-icon {
-    max-width: 44px;
-    min-width: 44px;
-    max-height: 44px;
-    min-height: 44px;
-    z-index: 2;
-    background: url(logo.svg) 100% 100%;
-    background-size: contain;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: auto;
-}
-
-#menu-icon-container{
-    max-width: 44px;
-    min-width: 44px;
-    max-height: 44px;
-    min-height: 44px;
-    background: white;
-    border-bottom-right-radius: 5px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
+    background: #fff;
 }
 
 #menu {
-    max-height: 44px;
-    min-height: 44px;
-    min-width: 100%;
-    max-width: 100%;
+    height: 3em;
+    width: 100%;
     display: flex;
-    align-content: center;
-    justify-content: space-around;
-    background: white;
-    margin-bottom: 5px;
+    background: #f5f5f5;
+    padding: 0;
+    margin: 0;
 }
 
-#menu > div {
+#menu > li span a {
+    color: inherit;
     cursor: pointer;
-    min-height: 44px;
+    text-decoration: none;
 }
 
-#menu-icon-placeholder{
-    min-width: 44px;
-    background: white;
+#menu > li {
+    flex: 1;
+    list-style: none;
+    text-align: center;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-size: 2em;
+    background-position: center;
+    background-position-y: 5px;
+    cursor: pointer;
 }
 
-#menu-game-btn {
+#menu > li > span {
+    position: relative;
+    top: 2em;
+}
+
+#menu > li.active span {
+    color: #444;
+    position: relative;
+    top: 2em;
+}
+
+
+#menu > li.active{
+    background-color: #dadada;
+    cursor: default;
 }
 
 #menu-feed-btn {
+    background-image: url(/static/feed.svg);
 }
 
-#menu-profile-btn {
+#menu-game-btn {
+    background-image: url(/static/game.svg);
 }
 
-.menu__btn {
-    display: flex;
-    align-content: center;
-    justify-content: center;
+#menu-notifications-btn {
+    background-image: url(/static/notifications.svg);
 }
 
-.menu__btn__active {
-    background: lavender;
+#menu-menu-btn {
+    background-image: url(/static/menu.svg);
 }
 
-.menu__icon {
-    min-height: 40px;
-    max-height: 40px;
-    min-width: 40px;
-    max-width: 40px;
-    margin: auto;
+#menu > li:hover > ul {
+	visibility: visible;
 }
 
-#menu-notifications-btn__icon {
-    background: url(bell.svg) 50% 50%  no-repeat;
-    background-size: contain;
+#menu > li.hover,
+#menu > li:hover {
+    position: relative;
+    z-index: 599;
 }
 
-#menu-profile-btn__icon{
-    background: url(profile.svg) 50% 50% no-repeat;
-    background-size: contain;
+#menu ul {
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: -50%;
+    z-index: 598;
+    width: 100%;
 }
 
-#menu-feed-btn__icon {
-    background: url(feed.svg) 50% 50% no-repeat;
-    background-size: contain;
+#menu ul li {
+    background-color: #eaeaea;
+    border: 1px solid darkgrey;
+    padding: 5px;
+    list-style: none;
 }
 
-#menu-game-btn__icon {
-    background: url(game.svg) 50% 50% no-repeat;
-    background-size: contain;
+.about {
+    text-align: center;
+    margin: 0.7em;
 }
+
+.settings-container {
+    text-align: center;
+    margin: 0.7em;
+}
+

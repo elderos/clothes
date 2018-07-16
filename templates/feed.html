@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% set menu_active='feed' %}
+{% block title %}Feed{% endblock %}
+{% block add_meta %}
+    <link rel="stylesheet" href="static/tabs.css">
+    <link rel="stylesheet" href="static/feed.css">
+    <script type="text/javascript" src="static/feed.js"></script>
+{% endblock %}
+
+{% block tabs %}
+<ul id="tabs">
+    <li id="tabs-subscriptions-btn">
+        Subscriptions
+    </li>
+    <li id="tabs-top-btn">
+        Top
+    </li>
+    <li id="tabs-explore-btn">
+        Explore
+    </li>
+    <li id="tabs-filter-btn" class="nopm">
+        <img src="/static/filter.svg">
+    </li>
+
+</ul>
+{% endblock %}
+
+{% block content %}
+<div id="tabs-filter-content">
+<form>
+<p>Price from: <input name="price_from" type="text"></input> to: <input name="price-to" type="text"></p>
+<p>Gender: <input name="gender" type="radio" value="m">M</input>
+<input name="gender" type="radio" value="f">F</input>
+<input name="gender" type="radio" value="u">?</input></p>
+<p><button>Filter</button>
+<button>Reset</button>
+<button>Cancel</button></p>
+</form>
+</div>
+<div id="tabs-content">
+    <div id="tabs-subscriptions-content">
+        {% with feed=subscriptions %}
+            {% include 'feed_scroll.html' %}
+        {% endwith %}
+    </div>
+    <div id="tabs-top-content">
+        {% with feed=top %}
+            {% include 'feed_scroll.html' %}
+        {% endwith %}
+    </div>
+    <div id="tabs-explore-content">
+        {% with feed=explore %}
+            {% include 'feed_scroll.html' %}
+        {% endwith %}
+    </div>
+</div>
+
+{% endblock %}

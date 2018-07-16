@@ -1,3 +1,9 @@
-cherrypy
-pg8000
+click
+Flask
+Flask-Login
+Flask-SQLAlchemy
+Jinja2
+pyflakes
+SQLAlchemy
 ujson
+virtualenv

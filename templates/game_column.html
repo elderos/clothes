@@ -1,0 +1,8 @@
+{% for item in column %}
+<div class="column-container" id='clothes_{{column_pos}}_{{ item.id }}'>
+    <a href="{{ item.link }}" target="_blank">
+        <img src="/item-image/{{ item.id }}"/>
+        {{ item.category }}
+    </a>
+</div>
+{% endfor %}

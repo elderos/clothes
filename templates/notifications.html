@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block add_meta %}
+    <link rel="stylesheet" href="static/notifications.css">
+    <script type="text/javascript" src="static/notifications.js"></script>
+{% endblock %}
+
+
+{% block content %}
+    {% for n in notifications %}
+    <table class="notifications-container">
+        <tr class="notification-container">
+            {% if n['post_id'] %}
+                <td>
+                    <img src="user-image/{{ n['id'] }}"/>
+                </td><td>
+                    {{ n['name']}} liked your post
+                </td><td>
+                    {{ n['timestamp']|timesince }}
+                </td><td class="smallpost-container">
+                    <a href="/post/{{n['post_id']}}">
+                        <img src="item-image/{{ n['item_1_id'] }}"/>
+                        <img src="item-image/{{ n['item_2_id'] }}"/>
+                    </a>
+                </td>
+            {% else %}
+                <td>
+                    <img src="user-image/{{ n['id'] }}"/>
+                </td><td>
+                    {{ n['name']}} subscribed on you
+                </td><td>
+                    {{ n['timestamp']|timesince }}
+                </td><td>
+                    <button>Subscribe</button>
+                </td>
+
+            {% endif %}
+        </tr>
+    </div>
+    </table>
+    {% endfor %}
+{% endblock %}
