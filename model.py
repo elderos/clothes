@@ -57,21 +57,41 @@ class Post(db.Model):
     def __repr__(self):
         return '<User %r>' % self.title
 
+class Subscription(object):
+    def __init__(self, user_id, subscriber_id, timestamp):
+        self.user_id = user_id
+        self.subscriber_id = subscriber_id
+        self.timestamp = timestamp
+
+class Save(object):
+    def __init__(self, user_id, post_id, timestamp):
+        self.user_id = user_id
+        self.post_id = post_id
+        self.timestamp = timestamp
+
+class Like(object):
+    def __init__(self, user_id, post_id, value, timestamp):
+        self.user_id = user_id
+        self.post_id = post_id
+        self.value = value
+        self.timestamp = timestamp
+
 
 subscriptions = db.Table('subscriptions',
     db.Column('id', db.Integer, primary_key=True),
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
     db.Column('subscriber_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
     db.Column('timestamp', db.Integer, unique=False, nullable=False),
-    db.UniqueConstraint('user_id', 'subscriber_id', name='uc_sc'),
+    #db.UniqueConstraint('user_id', 'subscriber_id', name='uc_sc'),
 )
+
 
 saves = db.Table('saves',
     db.Column('id', db.Integer, primary_key=True),
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
     db.Column('post_id', db.Integer, db.ForeignKey('post.id'), nullable=False),
     db.Column('timestamp', db.Integer, unique=False, nullable=False),
-    db.UniqueConstraint('user_id', 'post_id', name='uc_sv'),
+    #db.UniqueConstraint('user_id', 'post_id', name='uc_sv'),
 )
 
 likes = db.Table('likes',
@@ -80,8 +100,12 @@ likes = db.Table('likes',
     db.Column('post_id', db.Integer, db.ForeignKey('post.id'), nullable=False),
     db.Column('value', db.Integer, unique=False, nullable=False),
     db.Column('timestamp', db.Integer, unique=False, nullable=False),
-    db.UniqueConstraint('user_id', 'post_id', name='uc_sv'),
+    #db.UniqueConstraint('user_id', 'post_id', name='uc_sv'),
 )
+
+db.mapper(Subscription, subscriptions)
+db.mapper(Save, saves)
+db.mapper(Like, likes)
 
 def feed_query(addon='', order='order by post.timestamp desc '):
     return (

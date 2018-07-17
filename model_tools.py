@@ -87,18 +87,6 @@ def gen_user(path):
     )
 
 
-def gen_subscription(gen_data, days_before, db):
-    d = datetime.today() - timedelta(days=days_before)
-    current_d = ts(d - timedelta(minutes=random.randint(1200)))
-    u = random_user()
-    s = random_user()
-    return Subscription(
-        u.id,
-        s.id,
-        current_d,
-    )
-
-
 @click.group()
 def cli():
     pass
@@ -160,7 +148,7 @@ def iterate_day(path, days_before):
         im_1 = random_item()
         im_2 = random_item()
         current_d = ts(d + timedelta(minutes=random.randint(0, 1200)))
-        day_posts.append(Post(u.id, im_1.id, im_2.id, current_d))
+        day_posts.append(Post(user_id=u.id, item_1_id=im_1.id, item_2_id=im_2.id, timestamp=current_d))
         try:
             db.session.add(day_posts[-1])
             db.session.commit()
@@ -176,7 +164,7 @@ def iterate_day(path, days_before):
         for i in range(0, 3):
             p = random_post()
             try:
-                db.session.add(Like(u.id, p.id, 1, current_d))
+                db.session.add(Like(user_id=u.id, post_id=p.id, value=1, timestamp=current_d))
                 db.session.commit()
             except IntegrityError:
                 db.session.rollback()
