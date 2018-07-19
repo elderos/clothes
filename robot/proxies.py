@@ -15,8 +15,6 @@ class ProxyDownloader(object):
             return None
         return resp.text
 
-
-
     def get_fresh_proxies(self, count):
         resp = requests.get(
             'http://pubproxy.com/api/proxy?limit=%s&type=http&level=elite&country=RU&https=true' % count
