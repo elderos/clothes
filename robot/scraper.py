@@ -8,14 +8,6 @@ import signal
 from ..common import connect, init_logger
 
 
-class Proxy(object):
-    __slots__ = ['port', 'ip']
-
-    def __init__(self, ip, port):
-        self.ip = ip
-        self.port = port
-
-
 class QueueItem(object):
     __slots__ = ['queueid', 'method', 'data']
 
@@ -25,18 +17,8 @@ class QueueItem(object):
         self.data = data
 
 
-def get_fresh_proxies():
-    resp = requests.get(
-        'http://pubproxy.com/api/proxy?limit=20&type=http&level=elite&country=RU&https=true'
-    )
-    jdata = json.loads(resp.text)
-    proxies = []
-    for item in jdata['data']:
-        proxies.append(Proxy(item['ip'], item['port']))
-    return proxies
 
-
-def fill_queue(queue):
+def fetch_queue_buf(limit):
     conn = connect()
     cursor = conn.cursor()
     cursor.execute('''
@@ -49,13 +31,19 @@ where queueid in (
     limit %(limit)s
 )
 returning queueid, method, input_data
-    ''', {'limit': 1000})
+    ''', {'limit': limit})
 
     rows = cursor.fetchall()
 
+    res = []
     for row in rows:
         queue_item = QueueItem(row['queueid'], row['method'], row['input_data'])
-        queue.put(queue_item)
+        res.append(queue_item)
+    return res
+
+
+
+
 
 
 
@@ -63,9 +51,18 @@ def main(args):
     log = init_logger('scraper')
 
     proxies = get_fresh_proxies()
-    queue = Queue()
+
+    pool = Pool(args.processes)
 
     while True:
+        buf = fetch_queue_buf(args.buf_limit)
+        if not buf:
+            break
+        items = pool.map()
+
+    pool.join()
+    pool.close()
+
 
 
     for proxy in proxies:
@@ -76,6 +73,7 @@ if __name__ == '__main__':
     parser = ArgumentParser()
 
     parser.add_argument('-p', '--processes', type=int, default=50)
+    parser.add_argument('-b', '--buf-limit', type=int, default=10000)
 
     args = parser.parse_args()
     main(args)

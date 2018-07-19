@@ -40,6 +40,7 @@ class Viewer(object):
         cherrypy.log('All pairs fetched')
         self.ids = list(self.pairs.keys())
 
+
     def check_user_id(self):
         cookie = cherrypy.request.cookie
         if 'user-id' not in cookie:
