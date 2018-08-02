@@ -3,6 +3,7 @@ import pg8000
 import logging
 pg8000.paramstyle = 'pyformat'
 
+
 def connect():
     return pg8000.connect(
         os.getenv('USER', 'site'),
@@ -11,7 +12,13 @@ def connect():
     )
 
 
+logs = {}
+
+
 def init_logger(name):
+    if name in logs:
+        return logs[name]
+
     formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
@@ -23,5 +30,10 @@ def init_logger(name):
     ch = logging.StreamHandler()
     ch.setFormatter(formatter)
     ch.setLevel(logging.DEBUG)
+
+    logger.addHandler(fh)
+    logger.addHandler(ch)
+
+    logs[name] = logger
 
     return logger
